@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import Navbar from "../components/Navbar";
+import Header from "../components/Header";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -23,23 +25,18 @@ export const metadata: Metadata = {
     "A platform to connect and collaborate with professionals in Monterrey, Mexico.",
 };
 
-export default function RootLayout({
+export default function PrivateLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} h-full antialiased`}
-    >
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-        />
-      </head>
-      <body className="min-h-full flex flex-row bg-background">{children}</body>
-    </html>
+    <>
+      <Navbar />
+      <div className="flex flex-1 ml-48 flex-col">
+        <Header />
+        <main className="flex-1 overflow-y-auto">{children}</main>
+      </div>
+    </>
   );
 }
