@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import "../globals.css";
+import Navbar from "../components/Navbar";
 // import Navbar from "../components/Navbar";
 // import Header from "../components/Header";
 
@@ -31,8 +32,9 @@ export default function PrivateLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="flex flex-col bg-background min-h-screen  w-screen" style={{ fontFamily: "var(--font-manrope)" }}>
+    <Navbar />
       <main className="flex-1 overflow-y-auto">{children}</main>
-    </>
+    </div>
   );
 }

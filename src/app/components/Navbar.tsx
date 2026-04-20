@@ -1,15 +1,16 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AccentureLogo from "../../../public/accenture_logo_purple1.png";
 import Image from "next/image";
+import './navbar.css';
 
 const routes = [
-  { name: "Inicio", icon: "home", href: "/home" },
-  { name: "Tablero", icon: "dashboard", href: "/tablero" },
-  { name: "Reservaciones", icon: "bookmark", href: "/reservaciones" },
-  { name: "Calendario", icon: "calendar_month", href: "/calendario" },
+  { name: "Inicio", href: "/home" },
+  { name: "Tablero",href: "/tablero" },
+  { name: "Reservaciones", href: "/reservaciones" },
+  { name: "Calendario", href: "/calendario" },
 ];
 
 export default function Navbar() {
@@ -18,7 +19,7 @@ export default function Navbar() {
     console.log(pathname);
   }, [pathname]);
   return (
-    <header className="h-screen w-48 fixed top-0 left-0 z-40 bg-surface-lowest flex flex-col p-4 gap-8">
+    <header className="w-full fixed z-40 bg-background-page flex items-center flex-row p-4 gap-4">
       {/* <div className="container mx-auto flex flex-col items-center justify-between"> */}
       <span className="text-2xl font-bold text-on-surface-container pl-2">
         <Image
@@ -29,36 +30,25 @@ export default function Navbar() {
         />
       </span>
       {/* </div> */}
-      <nav className="flex flex-col text-white gap-2  ml-2">
+      <nav className="flex flex-row text-white gap-4 ml-2">
         {routes.map((route) => (
           <Link
             key={route.href}
-            className={`${pathname.startsWith(route.href) ? "bg-white text-surface-lowest p-2" : "text-on-surface-container"} flex flex-row items-center gap-4 mt-4`}
+            className={`${pathname.startsWith(route.href) ? "tab-active self-end -mb-4 rounded-t-xl" : "rounded-full"} text-on-background px-4 bg-background  flex flex-row items-center gap-4 `}
             href={route.href}
           >
-            <span className="material-symbols-outlined select-none">
-              {route.icon}
-            </span>
-            <span className="text-xs font-semibold select-none">
+            <span className="text-xs font-light select-none">
               {route.name}
             </span>
           </Link>
         ))}
       </nav>
-      <button className="mt-auto rounded-lg p-2 flex flex-rows items-center justify-center gap-2 text-surface font-light text-sm bg-background">
-        <span className="material-symbols-outlined">photo_camera</span>
-        Check in
-      </button>
-      <div className="flex flex-col gap-4">
-        <label className="flex items-center gap-4 ml-4 text-on-surface-container text-xs font-semibold">
-          <span className="material-symbols-outlined">settings</span>
-          Settings
+        <label className="bg-background p-2 select-none rounded-full text-on-background-2 font-semibold material-symbols-outlined ">
+          notifications
         </label>
-        <label className="flex items-center gap-4 ml-4 text-on-surface-container text-xs font-semibold">
-          <span className="material-symbols-outlined">help</span>
-          Support
+        <label className="bg-background p-2 select-none rounded-full text-on-background-2 font-semibold material-symbols-outlined">
+          person
         </label>
-      </div>
     </header>
   );
 }
